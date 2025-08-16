@@ -6,8 +6,6 @@
 #include "arraylist.h"
 #include "stack.h"
 
-//#include "exercises.h"
-
 //Funciones auxiliares que puedes utilizar para debuggear tus ejercicios
 //NO MODIFICAR
 void imprime_lista(List *L) {
