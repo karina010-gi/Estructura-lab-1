@@ -58,6 +58,16 @@ Crea una función que reciba una lista de enteros (int*) y
 retorne la suma de sus elementos.
 */
 int sumaLista(List *L) {
+   int numero = first(L);
+   while(numero != NULL){
+      if (numero == elem){
+         pop(L);
+         numero = next(L);
+      }
+      else{
+         numero = next(L);
+      }
+   }
    return 0;
 }
 
@@ -71,7 +81,17 @@ posiciona en el elemento anterior.
 */
 
 void eliminaElementos(List*L, int elem){
+   int numero = first(L);
 
+   while(numero != NULL){
+      if (numero == elem){
+         pop(L);
+         numero = next(L);
+      }
+      else{
+         numero = next(L);
+      }
+   }
 }
 
 /*
@@ -82,6 +102,21 @@ Puedes usar una pila auxiliar.
 */
 
 void copia_pila(Stack* P1, Stack* P2) {
+   Stack* pilaAux = create_stack();
+   void* elemento = last((List*) P1);
+
+   while(elemento != NULL)
+   {
+      push(pilaAux, elemento);
+      elemento = prev((List*) P1);
+   }
+
+   while(!is_empty(pilaAux))
+   {
+      elemento = pop(pilaAux);
+      push(P1, elemento);
+      push(P2, elemento);
+   }
 }
 
 /*
@@ -92,6 +127,21 @@ paraéntesis balanceados. Retorna 1 si están balanceados,
 */
 
 int parentesisBalanceados(char *cadena) {
+   Stack* pila = create_stack();
+   for (int i = 0; cadena[i] != '\0'; i++) {
+      char caracter = cadena[i];
+      if (caracter == '(' || caracter == '[' || caracter == '{'){
+         push(pila, &cadena[i]);
+      } 
+      else if (caracter == ')' || caracter == ']' || caracter == '}') {
+         char* PrimerChar = (char*)top(pila);
+         if (PrimerChar == NULL) return 0;
+         else if ((caracter == ')' && PrimerChar != '(') || (caracter == ']' && *PrimerChar != '[') || (caracter == '}' && *PrimerChar != '{')) {
+            return 1;
+         }
+         pop(pila);
+      }
+   }
+   free(pila);
    return 0;
 }
-
